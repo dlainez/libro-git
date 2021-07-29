@@ -1,0 +1,294 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "APIOrdenCompra",
+        "version": "1.0.0",
+        "description": "Ordenes de Compra de la GA de SEFIN"
+    },
+    "paths": {
+        "/crearusuario": {
+            "servers": [
+                {
+                    "url": "http://localhost:8081/api",
+                    "description": ""
+                }
+            ],
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/USUARIO"
+                            },
+                            "examples": {
+                                "crearusuairo": {
+                                    "value": {
+                                        "ID_USUARIO": "some text",
+                                        "NOMBRE": "some text"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "OrdenCompra"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/CONFIRMACION"
+                    },
+                    "409": {
+                        "$ref": "#/components/responses/MENSAJE_ERROR"
+                    }
+                },
+                "summary": "crearusuario"
+            }
+        },
+        "/actualizarcatalogos": {
+            "servers": [
+                {
+                    "url": "http://localhost:8081/api",
+                    "description": ""
+                }
+            ],
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CATALOGO"
+                            },
+                            "examples": {
+                                "CATALOGO": {
+                                    "value": {
+                                        "GESTION": 2021,
+                                        "INSTITUCION": 100,
+                                        "GA": 1
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "actualizacatalogos"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/CONFIRMACIONCATALOGOS"
+                    },
+                    "409": {
+                        "$ref": "#/components/responses/MENSAJE_ERROR"
+                    }
+                },
+                "summary": "actuaizarcatalogos"
+            }
+        },
+        "/consultarrubros": {
+            "servers": [
+                {
+                    "url": "http://localhost:8081/api",
+                    "description": ""
+                }
+            ],
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/RUBROS"
+                            },
+                            "examples": {
+                                "consultarrubros": {
+                                    "value": {
+                                        "ID_RUBRO": 49,
+                                        "NOMBRE_RUBRO": "some text",
+                                        "MARCA_RUBRO": "some text"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                    "consultarrubros"
+                ],
+                "responses": {
+                    "200": {
+                        "$ref": "#/components/responses/CONFIRMAR_RUBRO"
+                    },
+                    "404": {
+                        "$ref": "#/components/responses/MENSAJE_ERROR"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "USUARIO": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "id_usuario": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "nombre_usuario": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "ERROR": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "COD_ERROR": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "MENSAJE": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "CATALOGO": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "GESTION": {
+                        "description": "",
+                        "type": "number"
+                    },
+                    "INSTITUCION": {
+                        "description": "",
+                        "type": "number"
+                    },
+                    "GA": {
+                        "description": "",
+                        "type": "number"
+                    },
+                    "ESTADO": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            },
+            "RUBROS": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "ID_RUBRO": {
+                        "description": "",
+                        "type": "integer"
+                    },
+                    "NOMBRE_RUBRO": {
+                        "description": "",
+                        "type": "string"
+                    },
+                    "MARCA_RUBRO": {
+                        "description": "",
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "responses": {
+            "CONFIRMACION": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/USUARIO"
+                        },
+                        "examples": {
+                            "USUARIO": {
+                                "value": {
+                                    "ID_USUARIO": "some text",
+                                    "NOMBRE": "some text"
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": ""
+            },
+            "MENSAJE_ERROR": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/ERROR"
+                        },
+                        "examples": {
+                            "MENSAJE_ERROR": {
+                                "value": {
+                                    "COD_ERROR": "some text",
+                                    "MENSAJE": "some text"
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": ""
+            },
+            "CONFIRMACIONCATALOGOS": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/CATALOGO"
+                        },
+                        "examples": {
+                            "ACTUALIZAR": {
+                                "value": {
+                                    "GESTION": 2021,
+                                    "INSTITUCION": 100,
+                                    "GA": 1,
+                                    "ESTADO": "ACTUALIZADO"
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": ""
+            },
+            "CONFIRMAR_RUBRO": {
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/RUBROS"
+                        },
+                        "examples": {
+                            "consltarrubro": {
+                                "value": {
+                                    "ID_RUBRO": 20,
+                                    "NOMBRE_RUBRO": "some text",
+                                    "MARCA_RUBRO": "some text"
+                                }
+                            }
+                        }
+                    }
+                },
+                "description": ""
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "OrdenCompra",
+            "description": ""
+        },
+        {
+            "name": "actualizacatalogos",
+            "description": ""
+        },
+        {
+            "name": "consultarubros",
+            "description": ""
+        }
+    ]
+}
